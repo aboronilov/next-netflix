@@ -1,36 +1,17 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { NextPageContext } from "next";
-import { getSession, signIn, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 import Input from "@/components/Input";
-
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
-
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: '/',
-//         permanent: false,
-//       }
-//     }
-//   }
-
-//   return {
-//     props: {}
-//   }
-// }
+import Spinner from "@/components/Spinner";
 
 const Auth = () => {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const [variant, setVariant] = useState("login");
 
@@ -41,21 +22,21 @@ const Auth = () => {
   }, []);
 
   const login = useCallback(async () => {
+    setLoading(true)
     try {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
-
-      router.push("/");
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+    setLoading(false)
+  }, [email, password]);
 
   const register = useCallback(async () => {
+    setLoading(true)
     try {
       await axios.post("/api/register", {
         email,
@@ -67,6 +48,7 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false)
   }, [email, name, password, login]);
 
   return (
@@ -113,18 +95,21 @@ const Auth = () => {
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/profiles" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FcGoogle size={32} />
               </div>
               <div
-                onClick={() => signIn("github", { callbackUrl: "/" })}
+                onClick={() => signIn("github", { callbackUrl: "/profiles" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FaGithub size={32} />
               </div>
             </div>
+
+            {loading && <Spinner />}
+
             <p className="text-neutral-500 mt-12">
               {variant === "login"
                 ? "First time using Netflix?"
@@ -137,12 +122,6 @@ const Auth = () => {
               </span>
               .
             </p>
-            <button
-              onClick={() => signOut()}
-              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
-            >
-              Logout
-            </button>
           </div>
         </div>
       </div>
