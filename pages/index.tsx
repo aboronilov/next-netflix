@@ -3,8 +3,11 @@ import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
+import MovieList from "@/components/MovieList";
+import useMovieList from "@/hooks/useMovieList";
 
 export default function Home() {
+  const { data: movies = [] } = useMovieList();
   return (
     <>
       <Head>
@@ -22,6 +25,11 @@ export default function Home() {
         <Billboard />
       </section>
 
+      <main>
+        <div className="pb-40">
+          <MovieList title="Trending now" data={movies} />
+        </div>
+      </main>
     </>
   );
 }
