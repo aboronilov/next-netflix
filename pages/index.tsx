@@ -2,6 +2,7 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import Navbar from "@/components/Navbar";
+import Billboard from "@/components/Billboard";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
 
       <section>
         <Navbar />
+        <Billboard />
       </section>
 
     </>

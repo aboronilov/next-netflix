@@ -62,15 +62,19 @@ model VerificationToken {
 }
 
 model Movie {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  actors    String[]
-  desc      String
-  directors String[]
-  genre     String[]
-  image_url String
-  thumb_url String
-  imdb_url  String
-  name      String
-  rating    Float
-  year      Int
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  type        String
+  name        String
+  image       String
+  genre       String[]
+  actor       String[]
+  director    String[]
+  creator     String[]
+  description String
+  trailer     String
+  poster      String
+  year        String
+  rating      String
 }
+
+// https://www.npmjs.com/package/react-player
