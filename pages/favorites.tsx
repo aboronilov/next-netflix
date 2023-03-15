@@ -2,21 +2,12 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import Navbar from "@/components/Navbar";
-import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
-import useRandomDrama from "@/hooks/useRandomDrama";
-import useRandomThriller from "@/hooks/useRandomThriller";
-import useRandomCrime from "@/hooks/useRandomCrime";
-import useRandomAdventure from "@/hooks/useRandomAdventure";
-import useFavorites from "@/hooks/useFavorites";
 import dynamic from 'next/dynamic'
 import useInfoModal from "@/hooks/useInfoModal";
+import useFavorites from "@/hooks/useFavorites";
 
-export default function Home() {
-  const { data: drama = [] } = useRandomDrama()
-  const { data: thriller = [] } = useRandomThriller()
-  const { data: crime = [] } = useRandomCrime()
-  const { data: adventure = [] } = useRandomAdventure()
+export default function Series() {
   const { data: favorites = [] } = useFavorites()
 
   const {isOpen, closeModal} = useInfoModal()
@@ -40,15 +31,10 @@ export default function Home() {
       <section>
         <DynamicModal visible={isOpen} onClose={closeModal}/>
         <Navbar />
-        <Billboard />
       </section>
 
       <main>
-        <div className="pb-40">
-          <MovieList title="Drama" data={drama} />
-          <MovieList title="Thriller" data={thriller} />
-          <MovieList title="Crime" data={crime} />
-          <MovieList title="Adventure" data={adventure} />
+        <div className="pt-20">
           <MovieList title="My list" data={favorites} />
         </div>
       </main>

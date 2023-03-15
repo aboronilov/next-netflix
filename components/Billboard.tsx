@@ -1,16 +1,22 @@
 import useBillboard from "@/hooks/useBillboard";
-import React from "react";
+import React, { useCallback } from "react";
 import Spinner from "./Spinner";
 import ReactPlayer from "react-player";
 
-import {AiOutlineInfoCircle} from "react-icons/ai"
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { AiTwotoneStar } from "react-icons/ai";
 import PlayButton from "./PlayButton";
+import useInfoModal from "@/hooks/useInfoModal";
 
 type Props = {};
 
 const Billboard = (props: Props) => {
   const { data, isLoading } = useBillboard();
+  const { openModal } = useInfoModal();
+
+  const handleOpenModal = useCallback(() => {
+    openModal(data?.id);
+  }, [openModal, data?.id]);
 
   if (isLoading) {
     return (
@@ -42,7 +48,7 @@ const Billboard = (props: Props) => {
                     drop-shadow-xl z-10
                 "
           >
-            {data?.name} 
+            {data?.name}
           </p>
           <p
             className="
@@ -64,7 +70,8 @@ const Billboard = (props: Props) => {
             drop-shadow-xl
           "
           >
-            <span className="font-semibold mr-3">Rating: {" "}</span>{Number(data?.rating / 10)}/10
+            <span className="font-semibold mr-3">Rating: </span>
+            {Number(data?.rating / 10)}/10
           </p>
           <p
             className="
@@ -75,7 +82,8 @@ const Billboard = (props: Props) => {
             drop-shadow-xl
           "
           >
-            <span className="font-semibold mr-3">Director:{" "}</span>{String(data?.director).replaceAll(",", ", ")}
+            <span className="font-semibold mr-3">Director: </span>
+            {String(data?.director).replaceAll(",", ", ")}
           </p>
           <p
             className="
@@ -86,12 +94,14 @@ const Billboard = (props: Props) => {
             drop-shadow-xl
           "
           >
-            <span className="font-semibold mr-3">Actors:{" "}</span>{String(data?.actor).replaceAll(",", ", ")}
+            <span className="font-semibold mr-3">Actors: </span>
+            {String(data?.actor).replaceAll(",", ", ")}
           </p>
           <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
-            <PlayButton movieId={data?.id}/>
+            <PlayButton movieId={data?.id} />
             <button
-                className="
+              onClick={handleOpenModal}
+              className="
                     bg-white
                     bg-opacity-30
                     text-white
@@ -108,8 +118,8 @@ const Billboard = (props: Props) => {
                     transition
                 "
             >
-                <AiOutlineInfoCircle className="mr-1"/>
-                More Info
+              <AiOutlineInfoCircle className="mr-1" />
+              More Info
             </button>
           </div>
         </div>

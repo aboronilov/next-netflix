@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import NavbarItem from "./NavbarItem";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
+import { useRouter } from "next/router";
 
 const TOP_OFFSET = 66;
 
@@ -13,6 +14,8 @@ const Navbar = (props: Props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,10 +53,10 @@ const Navbar = (props: Props) => {
                 items-center
                 transition
                 duration-500
-                ${showBackground ? "bg-zinc-900/90" : "" }
+                ${showBackground ? "bg-zinc-900/90" : ""}
             `}
       >
-        <img src="/images/logo.png" className="h-4 lg:h-7" alt="logo" />
+        <img src="/images/logo.png" className="h-4 lg:h-7 cursor-pointer" alt="logo" onClick={() => router.push("/")} />
         <div
           className="
                     flex-row
@@ -64,12 +67,24 @@ const Navbar = (props: Props) => {
 
                 "
         >
-          <NavbarItem label="Home" />
-          <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
-          <NavbarItem label="New & popular" />
-          <NavbarItem label="My List" />
-          <NavbarItem label="Browse by languages" />
+          <div onClick={() => router.push("/")}>
+            <NavbarItem label="Home" />
+          </div>
+          <div onClick={() => router.push("/series")}>
+            <NavbarItem label="Series" />
+          </div>
+          <div onClick={() => router.push("/films")}>
+            <NavbarItem label="Films" />
+          </div>
+          <div onClick={() => router.push("/trending")}>
+            <NavbarItem label="New & popular" />
+          </div>
+          <div onClick={() => router.push("/favorites")}>
+            <NavbarItem label="My List" />
+          </div>
+          <div onClick={() => router.push("/")}>
+            <NavbarItem label="Browse by languages" />
+          </div>
         </div>
         <div
           onClick={toggleMobileMenu}

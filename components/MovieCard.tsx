@@ -1,7 +1,9 @@
 import { BsFillPlayFill } from "react-icons/bs";
+import {BiChevronDown} from "react-icons/bi"
 import { AiTwotoneStar } from "react-icons/ai";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
+import useInfoModal from "@/hooks/useInfoModal";
 
 type Props = {
   data: Record<string, any>;
@@ -9,6 +11,7 @@ type Props = {
 
 const MovieCard = ({ data }: Props) => {
   const router = useRouter()
+  const {openModal} = useInfoModal()
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <img
@@ -92,6 +95,26 @@ const MovieCard = ({ data }: Props) => {
               <BsFillPlayFill size={30} />
             </div>
             <FavoriteButton movieId={data?.id}/>
+            <div 
+              onClick={() => openModal(data?.id)}
+              className="
+                cursor-pointer
+                ml-auto
+                group/item
+                w-6 lg:w-10
+                h-6 lg:h-10
+                border-white
+                border-2
+                rounded-full
+                flex
+                justify-center
+                items-center
+                transition
+                hover:border-neutral-300
+              "
+            >
+              <BiChevronDown size={30} className="text-white group-hover/item:text-neutral-300 w-4"/>
+            </div>
           </div>
           <div className="flex flex-col mt-2 gap-2 text-white text-[10px] lg:text-[14px]">
             <div className="flex flex-row items-center justify-between">
