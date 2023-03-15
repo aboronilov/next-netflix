@@ -1,4 +1,4 @@
-# Fully responsive NextJS full-stack clone
+# Fully responsive NextJS full-stack Netflix clone
 The deployed site is [here](https://netflix.boronilov.store/)
 
 ## Technologies
@@ -17,18 +17,18 @@ The deployed site is [here](https://netflix.boronilov.store/)
 ## Features
 1. Authentication system via JWT, Google or Github account
 
-![Auth]()
+![Auth](https://raw.githubusercontent.com/aboronilov/next-netflix/main/public/screenshots/auth.webp)
 
 2. Main page with random movie billboard and random movies/series from different categories. Detailed info about movie on hover including playable trailer. All the info - on modal window
 
-![Main]()
+![Main](https://raw.githubusercontent.com/aboronilov/next-netflix/main/public/screenshots/main.webp)
  
-![Hover]()
+![Hover](https://raw.githubusercontent.com/aboronilov/next-netflix/main/public/screenshots/random_cat_hover.webp)
 
-![Modal]()
+![Modal](https://raw.githubusercontent.com/aboronilov/next-netflix/main/public/screenshots/modal.webp)
 
 3. Adding movies to your favorite list and removing it from your list. 
 
-![Favorites]()
+![Favorites](https://raw.githubusercontent.com/aboronilov/next-netflix/main/public/screenshots/favorites.webp)
 
 
