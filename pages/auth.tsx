@@ -11,7 +11,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const [variant, setVariant] = useState("login");
 
@@ -22,7 +22,7 @@ const Auth = () => {
   }, []);
 
   const login = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       await signIn("credentials", {
         email,
@@ -32,11 +32,11 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   }, [email, password]);
 
   const register = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       await axios.post("/api/register", {
         email,
@@ -48,7 +48,7 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false)
+    setLoading(false);
   }, [email, name, password, login]);
 
   return (
@@ -110,7 +110,7 @@ const Auth = () => {
 
             {loading && <Spinner />}
 
-            <p className="text-neutral-500 mt-12">
+            <p className={`text-neutral-500 ${loading ? "mt-9" : "mt-12"} `}>
               {variant === "login"
                 ? "First time using Netflix?"
                 : "Already have an account?"}
