@@ -1,12 +1,14 @@
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiTwotoneStar } from "react-icons/ai";
 import FavoriteButton from "./FavoriteButton";
+import { useRouter } from "next/router";
 
 type Props = {
   data: Record<string, any>;
 };
 
 const MovieCard = ({ data }: Props) => {
+  const router = useRouter()
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <img
@@ -73,7 +75,7 @@ const MovieCard = ({ data }: Props) => {
         >
           <div className="flex flex-row items-center gap-3">
             <div
-              onClick={() => {}}
+              onClick={() => router.push(`/watch/${data?.id}`)}
               className="
                         cursor-pointer
                         w-6 lg:w-10

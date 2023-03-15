@@ -4,6 +4,8 @@ import Spinner from "./Spinner";
 import ReactPlayer from "react-player";
 
 import {AiOutlineInfoCircle} from "react-icons/ai"
+import { AiTwotoneStar } from "react-icons/ai";
+import PlayButton from "./PlayButton";
 
 type Props = {};
 
@@ -26,14 +28,13 @@ const Billboard = (props: Props) => {
           muted
           width="100%"
           height={`56.25vw`}
-          style={{ opacity: "60%", objectFit: "cover" }}
+          style={{ opacity: "50%", objectFit: "cover" }}
         />
-        <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16">
+        <div className="absolute top-[20%] lg:top-[30%] ml-4 md:ml-16">
           <p
             className="
                     text-white 
-                    text-1xl 
-                    md:text-5xl 
+                    text-base md:text-2xl 
                     h-full 
                     w-[50%] 
                     lg:text-6xl 
@@ -41,24 +42,54 @@ const Billboard = (props: Props) => {
                     drop-shadow-xl z-10
                 "
           >
-            {data?.name}
+            {data?.name} 
           </p>
           <p
             className="
             text-white
-            text-[8px]
-            md:text-lg
-            mt-3
-            md:mt-8
-            w-[90%]
-            md:w-[80%]
-            lg:w-[50%]
+            text-[10px] md:text-base
+            mt-3 md:mt-5
+            w-[90%] md:w-[80%] lg:w-[70%]
             drop-shadow-xl
           "
           >
             {data?.description}
           </p>
+          <p
+            className="
+            text-white
+            text-[10px] md:text-base
+            mt-3 md:mt-5
+            w-[90%] md:w-[80%] lg:w-[70%]
+            drop-shadow-xl
+          "
+          >
+            <span className="font-semibold mr-3">Rating: {" "}</span>{Number(data?.rating / 10)}/10
+          </p>
+          <p
+            className="
+            text-white
+            text-[10px] md:text-base
+            mt-1 md:mt-2
+            w-[90%] md:w-[80%] lg:w-[70%]
+            drop-shadow-xl
+          "
+          >
+            <span className="font-semibold mr-3">Director:{" "}</span>{String(data?.director).replaceAll(",", ", ")}
+          </p>
+          <p
+            className="
+            text-white
+            text-[10px] md:text-base
+            mt-1 md:mt-2
+            w-[90%] md:w-[80%] lg:w-[70%]
+            drop-shadow-xl
+          "
+          >
+            <span className="font-semibold mr-3">Actors:{" "}</span>{String(data?.actor).replaceAll(",", ", ")}
+          </p>
           <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
+            <PlayButton movieId={data?.id}/>
             <button
                 className="
                     bg-white
