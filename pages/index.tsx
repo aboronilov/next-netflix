@@ -5,9 +5,19 @@ import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
 import useMovieList from "@/hooks/useMovieList";
+import useRandomDrama from "@/hooks/useRandomDrama";
+import useRandomThriller from "@/hooks/useRandomThriller";
+import useRandomCrime from "@/hooks/useRandomCrime";
+import useRandomAdventure from "@/hooks/useRandomAdventure";
+import useFavorites from "@/hooks/useFavorites";
 
 export default function Home() {
-  const { data: movies = [] } = useMovieList();
+  const { data: drama = [] } = useRandomDrama()
+  const { data: thriller = [] } = useRandomThriller()
+  const { data: crime = [] } = useRandomCrime()
+  const { data: adventure = [] } = useRandomAdventure()
+  const { data: favorites = [] } = useFavorites()
+
   return (
     <>
       <Head>
@@ -27,7 +37,11 @@ export default function Home() {
 
       <main>
         <div className="pb-40">
-          <MovieList title="Trending now" data={movies} />
+          <MovieList title="Drama" data={drama} />
+          <MovieList title="Thriller" data={thriller} />
+          <MovieList title="Crime" data={crime} />
+          <MovieList title="Adventure" data={adventure} />
+          <MovieList title="My list" data={favorites} />
         </div>
       </main>
     </>

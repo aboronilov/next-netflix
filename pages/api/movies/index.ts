@@ -14,11 +14,7 @@ export default async function handler(
   try {
     await serverAuth(req);
 
-    const movies = await prismadb.movie.findMany({
-      where: {
-        type: "Movie",
-      },
-    });
+    const movies = await prismadb.movie.findMany({});
     return res.status(200).json(movies);
   } catch (error: any) {
     console.log(`Fetch movies error: ${error.message}`);

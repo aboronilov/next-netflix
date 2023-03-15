@@ -1,5 +1,6 @@
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiTwotoneStar } from "react-icons/ai";
+import FavoriteButton from "./FavoriteButton";
 
 type Props = {
   data: Record<string, any>;
@@ -88,6 +89,7 @@ const MovieCard = ({ data }: Props) => {
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id}/>
           </div>
           <div className="flex flex-col mt-2 gap-2 text-white text-[10px] lg:text-[14px]">
             <div className="flex flex-row items-center justify-between">
@@ -104,13 +106,15 @@ const MovieCard = ({ data }: Props) => {
             <div className="">{data.description}</div>
             <div>
               <span className="text-blue-300 mr-1">Director: </span>{" "}
-              {data.director}
+              {String(data.director).replaceAll(",", ", ")}
             </div>
             <div className="">
-              <span className="text-blue-300 mr-1">Actors: </span> {String(data.actor).replaceAll(",", ", ")}
+              <span className="text-blue-300 mr-1">Actors: </span>{" "}
+              {String(data.actor).replaceAll(",", ", ")}
             </div>
             <div className="">
-              <span className="text-blue-300 mr-1">Created: </span> {String(data.creator).replaceAll(",", ", ")}
+              <span className="text-blue-300 mr-1">Created: </span>{" "}
+              {String(data.creator).replaceAll(",", ", ")}
             </div>
           </div>
         </div>
