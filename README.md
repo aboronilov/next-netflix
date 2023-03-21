@@ -1,5 +1,5 @@
 # Fully responsive NextJS full-stack Netflix clone
-The deployed site is [here](https://netflix.boronilov.store/)
+The deployed site is [here](https://next-netflix-flutvi99l-boronilov-team.vercel.app/)
 
 ## Technologies
 
